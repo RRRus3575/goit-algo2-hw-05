@@ -32,15 +32,17 @@ def count_unique_ips_hyperloglog(data):
 start_time_set = time.perf_counter()
 unique_ips_set = count_unique_ips_set(set_data)
 end_time_set = time.perf_counter()
+time_set = end_time_set - start_time_set
 
 start_time_hll = time.perf_counter()
 unique_ips_hll = count_unique_ips_hyperloglog(hll)
 end_time_hll = time.perf_counter()
+time_hll = end_time_hll - start_time_hll
 
 df = pd.DataFrame({
     "Метод": ["Точний підрахунок", "HyperLogLog"],
     "Унікальні елементи": [unique_ips_set, unique_ips_hll],
-    "Час виконання (сек.)": [end_time_set-start_time_set, end_time_hll-start_time_hll]
+    "Час виконання (сек.)": [time_set, time_hll]
 })
 
 
